@@ -1,0 +1,305 @@
+/* Основные переменные стилей */
+:root {
+    --primary-color: #4361ee;
+    --success-color: #4cc9f0;
+    --danger-color: #f72585;
+    --light-color: #f8f9fa;
+    --dark-color: #212529;
+    --gray-color: #6c757d;
+    --border-radius-value: 12px;
+    --box-shadow-value: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition-duration: 0.3s;
+    --transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Базовые стили для всех элементов */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Стили для тела документа */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: #f0f2f5;
+    color: var(--dark-color);
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Стили для заголовка */
+h1 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+/* Стили для формы добавления задачи */
+.add-task-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.add-task-input {
+    flex: 1;
+    padding: 12px 16px;
+    font-size: 16px;
+    border: 2px solid #e9ecef;
+    border-radius: var(--border-radius-value);
+    outline: none;
+    transition: all var(--transition-duration) var(--transition-timing-function);
+}
+
+.add-task-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+}
+
+/* Стили для кнопок */
+.button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: var(--border-radius-value);
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-duration) var(--transition-timing-function);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.add-task-button {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.add-task-button:hover {
+    background-color: #3a56d4;
+    transform: translateY(-2px);
+}
+
+/* Стили для списка задач */
+.tasks-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Анимация появления задачи */
+@keyframes task-appear-animation {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Стили для элемента задачи */
+.task-item {
+    background-color: white;
+    border-radius: var(--border-radius-value);
+    padding: 16px;
+    box-shadow: var(--box-shadow-value);
+    transition: all var(--transition-duration) var(--transition-timing-function);
+    transform-origin: top center;
+}
+
+.animated {
+    animation: task-appear-animation 0.4s ease-out forwards;
+}
+
+/* Анимация удаления задачи */
+@keyframes task-disappear-animation {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        max-height: 200px;
+        margin-bottom: 12px;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+        max-height: 0;
+        margin-bottom: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}
+
+.task-item.removing {
+    animation: task-disappear-animation 0.3s ease-in forwards !important;
+    pointer-events: none;
+}
+
+/* Стили для заголовка задачи */
+.task-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.task-title {
+    flex: 1;
+    font-size: 17px;
+    transition: all var(--transition-duration) var(--transition-timing-function);
+}
+
+.completed-task {
+    text-decoration: line-through;
+    color: var(--gray-color);
+    opacity: 0.8;
+}
+
+/* Стили для действий с задачей */
+.task-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.task-actions .button {
+    padding: 8px 12px;
+    font-size: 14px;
+}
+
+.add-subtask-button {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.add-subtask-button:hover {
+    background-color: #3aa8d4;
+}
+
+.delete-button {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #e5177b;
+}
+
+/* Стили для чекбокса */
+.task-checkbox {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--primary-color);
+    cursor: pointer;
+    transition: all var(--transition-duration) var(--transition-timing-function);
+}
+
+.task-checkbox:hover {
+    transform: scale(1.1);
+}
+
+/* Стили для списка подзадач */
+.subtasks-list {
+    list-style: none;
+    padding-left: 36px;
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.subtask-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.subtask-title {
+    flex: 1;
+    font-size: 15px;
+    transition: all var(--transition-duration) var(--transition-timing-function);
+}
+
+/* Анимация для кнопок */
+@keyframes button-pulse-animation {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(0.95);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.button:active {
+    animation: button-pulse-animation 0.3s ease;
+}
+
+/* Анимация для чекбоксов */
+@keyframes checkbox-pulse-animation {
+    0% {
+        opacity: 0.5;
+        transform: scale(0.8);
+    }
+
+    50% {
+        opacity: 0.2;
+        transform: scale(1.2);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1.5);
+    }
+}
+
+.task-checkbox {
+    position: relative;
+}
+
+.task-checkbox::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border-radius: 50%;
+    background: rgba(67, 97, 238, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.task-checkbox:checked::after {
+    animation: checkbox-pulse-animation 0.5s ease;
+}
+
+/* Адаптивные стили для мобильных устройств */
+@media screen and (max-width: 600px) {
+    .add-task-container {
+        flex-direction: column;
+    }
+
+    .task-header {
+        flex-wrap: wrap;
+    }
+
+    .task-actions {
+        width: 100%;
+        justify-content: flex-end;
+        margin-top: 10px;
+    }
+}
